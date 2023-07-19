@@ -8,11 +8,14 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-    
     @Bean
     public SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
-
-        
+        http.authorizeHttpRequests((auth) -> auth
+            .antMatchers("/public").permitAll()
+            .anyRequest()
+            .authenticated()
+        )
+            .httpBasic();
         return http.build();
     }
 }

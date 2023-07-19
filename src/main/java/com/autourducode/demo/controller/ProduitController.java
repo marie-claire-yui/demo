@@ -27,6 +27,18 @@ public class ProduitController {
         return produitService.lire();
     }
 
+    // "sécurisation du end point protected"
+    @GetMapping("/protected")
+    public String helloSecure(){
+        return "Hello Autour Du Code Protected !";
+    }
+
+    @GetMapping("/public")
+    public String helloPublic(){
+        return "Hello Autour Du Code Public !";
+    }
+    //"sécurisation"
+
     @PutMapping("/update/{id}") // ?name=autourducode login/AZE
     public Produit update(@PathVariable Long id,@RequestBody Produit produit){
         return produitService.modifier(id, produit);
