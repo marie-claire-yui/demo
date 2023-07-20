@@ -1,5 +1,5 @@
-spring:
-  security:
-    user:
-      name: autourducode
-      password: demo
+# spring:
+#   security:
+#     user:
+#       name: autourducode
+#       password: demo
