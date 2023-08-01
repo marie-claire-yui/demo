@@ -42,6 +42,11 @@ public class ProduitController {
     public String helloUser(){
         return "Hello Autour Du Code User !";
     }
+
+     @GetMapping("/admin")
+    public String helloAdmin(){
+        return "Hello Autour Du Code Admin!";
+    }
     //"sécurisation"
 
     @PutMapping("/update/{id}") // ?name=autourducode login/AZE

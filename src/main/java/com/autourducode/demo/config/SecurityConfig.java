@@ -17,10 +17,11 @@ import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain apiSecurity(HttpSecurity http) throws Exception {
+        // http.csrf((csrf) -> csrf.disable());
         http.authorizeHttpRequests((auth) -> auth
-            .requestMatchers(new AntPathRequestMatcher("/produit/protected")).hasAnyRole("_ADMIN","_USER")
-            .requestMatchers(new AntPathRequestMatcher("/produit/user")).hasRole("_USER")
-            .requestMatchers(new AntPathRequestMatcher("/produit/admin")).hasRole("_ADMIN")
+            .requestMatchers(new AntPathRequestMatcher("/produit/protected")).hasAnyRole("ADMIN","USER")
+            .requestMatchers(new AntPathRequestMatcher("/produit/user")).hasRole("USER")
+            .requestMatchers(new AntPathRequestMatcher("/produit/admin")).hasRole("ADMIN")
                 .requestMatchers(new AntPathRequestMatcher("/produit/public")).permitAll()
             .anyRequest()
             .authenticated()
@@ -33,13 +34,13 @@ public class SecurityConfig {
     public InMemoryUserDetailsManager userDetailsService(){
         UserDetails user = User.builder()
         .username("user")
-        .password("user")
-        .roles("_USER")
+        .password(passwordEncoder().encode("user"))
+        .roles("USER")
         .build();
         UserDetails admin = User.builder()
         .username("admin")
-        .password("admin")
-        .roles("_ADMIN")
+        .password(passwordEncoder().encode("admin"))
+        .roles("ADMIN")
         .build();
 
         return new InMemoryUserDetailsManager(user, admin);
